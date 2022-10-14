@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Reflex game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="get_scores(listScores)">
+  <div class="message">
+    <p>Hello,</p>
+    <p>You think you have fast reflex?</p>
+    <p class="try">Try to beat our champs!</p>
+    <p>(or at least average of 0.25s <span><i class="fa-regular fa-face-grin-squint-tears"></i></span> )</p>
+    <form action="">
+      <label for="">Type your name</label>
+      <input type="text" class="input-value">
+      <p>And give your best!</p>
+      <button class="start-app">Start</button>
+    </form>
+    <h1 class="score-label">Top scores <span><i class="fa-solid fa-crown"></i></span></h1>
+    <div class="errors"></div>
+    <ol class="highscores">
+      
+    </ol>
+  </div>
+
+  <!-- Playing cont -->
+
+  <div class="playing-cont">
+    <div class="stopwatch">
+      <p class="seconds-label">00</p>
+      <p class="dots">:</p>
+      <p class="miliseconds-label">00</p>
+    </div>
+    <button class="start-stopwatch">START</button>
+    <div class="how-to-play">
+      <p>When you press START the screen will turn <span style="color: green; font-size: 20px;">green</span>, then you will have five seconds to prepare, after five seconds the screen will turn <span style="color: red; font-size: 20px;">red</span>, as soon as the screen turns red press the timer above as soon as possible. Good luck.</p>
+    </div>
+  </div>
+
+  <!-- Score cont -->
+
+  <div class="current-score">
+    <i class="fa-solid fa-crown fa-crown2"></i>
+    <i class="fa-solid fa-face-frown"></i>
+    <p class="congrats">Congratulations Laks, your visual reflex time is above average (0.25s)</p>
+    <p class="reflex-time-label">Your reflex time is:</p>
+    <p class="current-time">00:15</p>
+    <button class="reset">RESET</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
