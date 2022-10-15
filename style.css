@@ -39,7 +39,7 @@ body .message .try {
   font-size: 20px;
   font-weight: bolder;
 }
-body .message form {
+body .message .start-game {
   text-align: center;
   gap: 10px;
   margin-top: 50px;
@@ -47,10 +47,10 @@ body .message form {
   flex-direction: column;
   color: #faa307;
 }
-body .message form label {
+body .message .start-game label {
   font-size: 25px;
 }
-body .message form input {
+body .message .start-game input {
   align-self: center;
   width: 150px;
   text-align: center;
@@ -61,11 +61,11 @@ body .message form input {
   outline: none;
   border-bottom: 2px solid #252525;
 }
-body .message form input:active {
+body .message .start-game input:active {
   border: none;
   outline: none;
 }
-body .message form p {
+body .message .start-game p {
   font-size: 20px;
 }
 body .message .score-label {
@@ -87,7 +87,9 @@ body .message .highscores li {
   font-size: 15px;
   width: 150px;
   align-self: center;
-  margin-left: 70px;
+}
+body .message .highscores li::marker {
+  font-weight: bolder;
 }
 body button {
   align-self: center;
@@ -171,12 +173,20 @@ body .current-score .fa-face-frown {
   font-size: 60px;
   color: #f94144;
 }
+body .current-score .player-score {
+  display: none;
+}
 body .current-score .congrats {
-  margin-top: 40px;
+  margin-top: 30px;
+  align-self: center;
   font-weight: 100;
-  width: 300px;
-  text-align: center;
   font-size: 20px;
+}
+body .current-score .message-for-user {
+  align-self: center;
+  width: 240px;
+  font-size: 20px;
+  text-align: center;
 }
 body .current-score .reflex-time-label {
   font-size: 22px;
@@ -188,6 +198,10 @@ body .current-score .current-time {
   text-align: center;
   color: #007f5f;
   font-size: 40px;
+  border: none;
+  width: 200px;
+  align-self: center;
+  font-family: monospace;
 }
 body .current-score .reset {
   box-shadow: 2px 1px 5px #007f5f;

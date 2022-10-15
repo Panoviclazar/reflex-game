@@ -1,10 +1,5 @@
 [
-  {"name":"Lazar", "score": 0.25},
-  {"name":"Aleksandra", "score": 0.15},
-  {"name":"Nikola", "score": 0.18},
-  {"name":"Teodora", "score": 0.22},
-  {"name":"Petar", "score": 0.26},
-  {"name":"Ana", "score": 0.20},
-  {"name":"Marko", "score": 0.22},
-  {"name":"Marija", "score": 0.17}
+  {"name":"Aleksandra", "score": 25},
+  {"name":"Lazar", "score": 36},
+  {"name":"Maks", "score": 47}
 ]

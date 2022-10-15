@@ -14,13 +14,16 @@ const crownEoji = document.querySelector(".fa-crown2");
 const sadEmoji = document.querySelector(".fa-face-frown");
 const Erorrs = document.querySelector(".errors");
 const highscores = document.querySelector(".highscores");
+const playerName = document.querySelector(".player-name");
+const userMessage = document.querySelector(".message-for-user");
+const playerScore = document.querySelector(".player-score");
 let currentUser;
 let enable = true;
 
 btnStartApp.addEventListener("click", (e) => {
-  e.preventDefault();
   if (inputValue.value) {
     currentUser = inputValue.value;
+    playerName.value = currentUser;
     messageCont.style.display = "none";
     setTimeout(function () {
       playCont.style.display = "flex";
@@ -79,21 +82,30 @@ stopwatch.addEventListener("click", () => {
   if (Number(milisecondsLabel.textContent) > 0) {
     clearInterval(interval);
     body.style.background = "#80ed99";
-    currentTime.textContent = `${secondsLabel.textContent}:${milisecondsLabel.textContent}`;
+    playerScore.value = miliseconds;
+    currentTime.value = `${secondsLabel.textContent}:${milisecondsLabel.textContent}`;
+    playerName.value = currentUser;
+    console.log(playerScore.value, playerName.value);
     setTimeout(function () {
       if (
         Number(milisecondsLabel.textContent) < 25 &&
-        Number(secondsLabel.textContent) < 1
+        Number(secondsLabel.textContent) == 0
       ) {
-        congrats.textContent = `Congratulations ${currentUser}, your visual reflex time is better than average (0.25s)`;
+        congrats.textContent = `Congratulations ${currentUser},`;
+        userMessage.textContent =
+          "your visual reflex time is better than average (0.25s)";
         crownEoji.style.display = "block";
-      } else {
+      } else if (
+        Number(milisecondsLabel.textContent) >= 25
+      ) {
         sadEmoji.style.display = "block";
         reflexTimeLabel.style.color = "#f94144";
         currentTime.style.color = "#f94144";
         reset.style.color = "#f94144";
         reset.style.boxShadow = "1px 1px 5px #f94144";
-        congrats.textContent = `Good try ${currentUser}, but your visual reflex time is worse than average (0.25s), try again.`;
+        congrats.textContent = `Good try ${currentUser},`;
+        userMessage.textContent =
+          "but your visual reflex time is worse than average (0.25s)";
       }
       seconds = 0;
       miliseconds = 0;
@@ -109,10 +121,6 @@ stopwatch.addEventListener("click", () => {
   }
 });
 
-reset.addEventListener("click", () => {
-  window.location.reload();
-});
-
 // highscores fetch
 
 function get_scores(callback) {
@@ -126,7 +134,6 @@ function get_scores(callback) {
       }
       response.json().then(function (data) {
         let allscoress = JSON.stringify(data);
-        console.log(JSON.parse(allscoress));
         callback(allscoress);
       });
     })
@@ -141,17 +148,19 @@ function get_scores(callback) {
 var listScores = function (scores) {
   let object = JSON.parse(scores);
   // lowest scores
-  //let lowestScores = object[9].score;
-  //document.getElementById("lowscore").value = lowestScores;
+  let lowestScore = object[2].score;
+  document.getElementById("lowscore").value = lowestScore;
 
-  for(let i = 0; i < 3; i++){
-    let li = document.createElement('li');
-    let text = document.createTextNode(`${object[i].name} (${object[i].score})`)
+  for (let i = 0; i < object.length; i++) {
+    let li = document.createElement("li");
+    let text = document.createTextNode(
+      `${object[i].name} (${object[i].score}s)`
+    );
     li.appendChild(text);
     highscores.appendChild(li);
 
-    if( i === 0 ){
-      li.setAttribute('class', 'top1')
+    if (i === 0) {
+      li.setAttribute("class", "top1");
     }
     if (i === 1) {
       li.setAttribute("class", "top2");
@@ -161,3 +170,34 @@ var listScores = function (scores) {
     }
   }
 };
+
+function resetForm() {
+  while (highscores.hasChildNodes()) {
+    highscores.removeChild(highscores.firstChild);
+  }
+
+  get_scores(listScores);
+
+  document.getElementById("score").value = 0;
+
+}
+
+reset.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  var formData = new FormData(this);
+
+  // POST fetch req
+
+  fetch("highscores.php", {
+    method: "post",
+    body: formData,
+  })
+    .then(function (response) {
+      return response.text();
+    })
+    .then(function (text) {
+      resetForm();
+      console.log(text);
+    });
+});

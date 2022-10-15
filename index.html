@@ -14,17 +14,18 @@
     <p>You think you have fast reflex?</p>
     <p class="try">Try to beat our champs!</p>
     <p>(or at least average of 0.25s <span><i class="fa-regular fa-face-grin-squint-tears"></i></span> )</p>
-    <form action="">
+    <div class="start-game">
       <label for="">Type your name</label>
       <input type="text" class="input-value">
       <p>And give your best!</p>
       <button class="start-app">Start</button>
-    </form>
+    </div>
     <h1 class="score-label">Top scores <span><i class="fa-solid fa-crown"></i></span></h1>
     <div class="errors"></div>
     <ol class="highscores">
       
     </ol>
+    <input type="hidden" id="lowscore">
   </div>
 
   <!-- Playing cont -->
@@ -43,14 +44,17 @@
 
   <!-- Score cont -->
 
-  <div class="current-score">
+  <form class="current-score">
     <i class="fa-solid fa-crown fa-crown2"></i>
     <i class="fa-solid fa-face-frown"></i>
-    <p class="congrats">Congratulations Laks, your visual reflex time is above average (0.25s)</p>
+    <p class="congrats"></p>
+    <input readonly type="hidden" class="player-name" name="player_name">
+    <p class="message-for-user"></p>
     <p class="reflex-time-label">Your reflex time is:</p>
-    <p class="current-time">00:15</p>
+    <input readonly type="text" class="current-time">
+    <input readonly type="number" class="player-score" id="score" name="player_score">
     <button class="reset">RESET</button>
-  </div>
+  </form>
 
   <script src="script.js"></script>
 </body>
