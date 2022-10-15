@@ -154,7 +154,7 @@ var listScores = function (scores) {
   for (let i = 0; i < object.length; i++) {
     let li = document.createElement("li");
     let text = document.createTextNode(
-      `${object[i].name} (${object[i].score}s)`
+      `${object[i].name} (${object[i].score}ms)`
     );
     li.appendChild(text);
     highscores.appendChild(li);
