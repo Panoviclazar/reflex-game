@@ -1,52 +1,41 @@
 <?php
-  // myform data
-  $player_name = filter_var($_POST[player_name], FILTER_SANITIZE_STRING);
-  $player_score = (int)$_POST[player_score];
-
-  // associative array
+  error_reporting(E_ALL); 
+  ini_set('display_errors', 1);
+  
+  $player_name = $_POST['player_name'];
+  $player_score = (int)$_POST['player_score'];
+  
   $player_array = array("name"=>$player_name, "score"=>$player_score);
-
-  // read scores.JSON and turn into a PHP associative array
+  
   $highscoreJSON = file_get_contents("scores.json");
   $highscore_array = json_decode($highscoreJSON, true);
-
-  // Declare variables
+  
   $key = 0;
   $highscores = array();
-
-  // If the player made it on the high score list
-  if ($player_score > $highscore_array[2][score]) {
+  
+  if ($player_score > $highscore_array[2]['score']) {
     foreach($highscore_array as $k => $value) {
-      $score = $value[score];
-
-      // The player has not beaten these scores
+      $score = $value['score'];
+      
       if ($score >= $player_score) {
         $highscores[$k] = $value;
       }
-
-      // The player has beat this score
+      
       if ($score < $player_score) {
-          $key = $k;  // current value index
-          // add the player at this spot on the high score list
+          $key = $k;
+        
           $highscores[$k] = $player_array;
-          // loop through the rest of the highscores, up to the 9th item
+          
           for ($i = $key; $i < 2; $i++) {
             $highscores[$i + 1] = $highscore_array[$i];
           }
-          break; // end the loop here
+          break;
       }
     }
-
-    // Parse $highscores into a json string and rewrite scores.json
+    
     $jsonscores = json_encode($highscores);
     file_put_contents('scores.json', $jsonscores);
 
-    // print "Howdy Partner!"
-    echo "Howdy Partner!";
-  }
-  // If the player did not make it on the highscore list
-  else {
-    // Print "No high score"
-    echo "No high score";
+    var_dump(file_put_contents('scores.json', $jsonscores));
   }
 ?>
